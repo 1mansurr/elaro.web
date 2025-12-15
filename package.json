@@ -4,7 +4,8 @@
   "description": "ELARO - Never Forget website",
   "main": "index.html",
   "scripts": {
-    "dev": "npx serve . -p 3000",
+    "dev": "netlify dev",
+    "dev:static": "npx serve . -p 3000",
     "build": "node build.js",
     "build:serve": "npm run build && npx serve . -p 4173",
     "preview": "npx serve . -p 4173"
@@ -17,9 +18,12 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "serve": "^14.2.1"
+    "serve": "^14.2.1",
+    "netlify-cli": "^17.0.0"
   },
   "dependencies": {
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "resend": "^3.2.0",
+    "googleapis": "^128.0.0"
   }
 }

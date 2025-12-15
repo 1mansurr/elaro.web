@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELARO is Coming Soon</title>
-    <meta name="description" content="Get ready for ELARO, the intelligent study assistant that ensures you never forget.">
+    <title>ELARO - Join the Waitlist</title>
+    <meta name="description" content="Join the ELARO waitlist and be the first to know when we launch. Never forget your studies again.">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://myelaro.com/coming-soon.html">
-    <meta property="og:title" content="ELARO is Coming Soon">
-    <meta property="og:description" content="Get ready for ELARO, the intelligent study assistant that ensures you never forget.">
+    <meta property="og:title" content="ELARO - Join the Waitlist">
+    <meta property="og:description" content="Join the ELARO waitlist and be the first to know when we launch.">
     <meta property="og:image" content="https://myelaro.com/hero.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -19,8 +19,8 @@
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://myelaro.com/coming-soon.html">
-    <meta property="twitter:title" content="ELARO is Coming Soon">
-    <meta property="twitter:description" content="Get ready for ELARO, the intelligent study assistant that ensures you never forget.">
+    <meta property="twitter:title" content="ELARO - Join the Waitlist">
+    <meta property="twitter:description" content="Join the ELARO waitlist and be the first to know when we launch.">
     <meta property="twitter:image" content="https://myelaro.com/hero.png">
     
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
@@ -81,6 +81,13 @@
             -webkit-font-feature-settings: 'liga';
             -webkit-font-smoothing: antialiased;
         }
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark font-sans min-h-screen flex flex-col relative overflow-hidden transition-colors duration-300">
@@ -99,16 +106,39 @@
                 Get ready for <span class="text-primary">ELARO</span>
             </h1>
             <p class="mt-6 text-lg md:text-xl text-muted-light dark:text-muted-dark max-w-2xl mx-auto leading-relaxed">
-                Our platform is launching soon.
+                Our platform is launching soon. In the meantime, you can subscribe to our mailing list to get notified on the launch day.
             </p>
-            <p class="mt-4 text-lg md:text-xl text-muted-light dark:text-muted-dark max-w-2xl mx-auto leading-relaxed">
-                In the meantime, read about <a class="text-primary hover:text-primary-hover font-medium underline decoration-2 decoration-primary/30 underline-offset-4 transition-all hover:decoration-primary" href="how-it-works.html">How ELARO works</a>.
-            </p>
-            <div class="mt-12">
-                <a href="how-it-works.html" class="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white bg-primary rounded-lg hover:bg-primary-hover shadow-lg shadow-primary/30 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark">
-                    Proceed
-                </a>
+            <div class="mt-12 w-full max-w-lg mx-auto">
+                <form id="waitlist-form" class="flex flex-col sm:flex-row gap-3">
+                    <input 
+                        id="email-input"
+                        name="email"
+                        class="flex-grow px-4 py-3 rounded-lg border border-border-light dark:border-border-dark bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm text-text-light dark:text-text-dark focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all placeholder-gray-400 dark:placeholder-gray-500" 
+                        placeholder="Enter your email address" 
+                        required 
+                        type="email"
+                        autocomplete="email"
+                    />
+                    <button 
+                        id="submit-btn"
+                        class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary rounded-lg hover:bg-primary-hover shadow-lg shadow-primary/30 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-offset-background-dark disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none" 
+                        type="submit"
+                    >
+                        <span id="submit-text">Notify Me</span>
+                        <span id="submit-spinner" class="hidden ml-2">
+                            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+                <div id="message-container" class="mt-4 fade-in hidden"></div>
             </div>
+            <p class="mt-8 text-muted-light dark:text-muted-dark">
+                Or learn more about
+                <a class="text-primary hover:text-primary-hover font-medium underline decoration-2 decoration-primary/30 underline-offset-4 transition-all hover:decoration-primary" href="how-it-works.html">how ELARO works</a>.
+            </p>
         </div>
     </main>
     <footer class="w-full py-8 px-4 sm:px-6 lg:px-8 mt-16 z-10">
@@ -150,6 +180,75 @@
                 htmlElement.classList.add('dark');
                 iconSpan.textContent = 'light_mode';
                 localStorage.setItem('theme', 'dark');
+            }
+        });
+
+        // Waitlist form handling
+        const form = document.getElementById('waitlist-form');
+        const emailInput = document.getElementById('email-input');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        const submitSpinner = document.getElementById('submit-spinner');
+        const messageContainer = document.getElementById('message-container');
+
+        function showMessage(message, isSuccess = true) {
+            messageContainer.className = `mt-4 fade-in p-4 rounded-lg ${
+                isSuccess 
+                    ? 'bg-green-50 dark:bg-green-900/20 text-green-800 dark:text-green-300 border border-green-200 dark:border-green-800' 
+                    : 'bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 border border-red-200 dark:border-red-800'
+            }`;
+            messageContainer.textContent = message;
+            messageContainer.classList.remove('hidden');
+        }
+
+        function hideMessage() {
+            messageContainer.classList.add('hidden');
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            
+            // Hide previous messages
+            hideMessage();
+            
+            // Disable form during submission
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            submitSpinner.classList.remove('hidden');
+            
+            try {
+                const response = await fetch('/api/waitlist', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email: email }),
+                });
+
+                if (response.ok) {
+                    showMessage('🎉 Success! You\'ve been added to the waitlist. We\'ll notify you when we launch!', true);
+                    emailInput.value = '';
+                } else {
+                    const data = await response.json().catch(() => ({}));
+                    throw new Error(data.error || 'Something went wrong');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showMessage('❌ Something went wrong. Please try again later or contact us directly.', false);
+            } finally {
+                // Re-enable form
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                submitSpinner.classList.add('hidden');
+            }
+        });
+
+        // Clear message when user starts typing
+        emailInput.addEventListener('input', () => {
+            if (!messageContainer.classList.contains('hidden')) {
+                hideMessage();
             }
         });
     </script>

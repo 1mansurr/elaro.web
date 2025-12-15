@@ -23,3 +23,10 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# Local Netlify folder
+.netlify
+
+# Credentials and secrets
+*credentials*.json
+pro-icon-*.json
