@@ -447,20 +447,35 @@
 </div>
 </footer>
 <script>
-        // Simple theme toggle logic
-        const toggleButton = document.querySelector('button[aria-label="Toggle theme"]');
+        // Persisted theme toggle (matches other pages)
+        const savedTheme = localStorage.getItem('theme') || 'light';
         const htmlElement = document.documentElement;
+        const toggleButton = document.querySelector('button[aria-label="Toggle theme"]');
         const iconSpan = toggleButton.querySelector('span');
 
+        // Apply saved theme on page load
+        if (savedTheme === 'dark') {
+            htmlElement.classList.remove('light');
+            htmlElement.classList.add('dark');
+            iconSpan.textContent = 'light_mode';
+        } else {
+            htmlElement.classList.remove('dark');
+            htmlElement.classList.add('light');
+            iconSpan.textContent = 'dark_mode';
+        }
+
+        // Theme toggle logic
         toggleButton.addEventListener('click', () => {
             if (htmlElement.classList.contains('dark')) {
                 htmlElement.classList.remove('dark');
                 htmlElement.classList.add('light');
                 iconSpan.textContent = 'dark_mode';
+                localStorage.setItem('theme', 'light');
             } else {
                 htmlElement.classList.remove('light');
                 htmlElement.classList.add('dark');
                 iconSpan.textContent = 'light_mode';
+                localStorage.setItem('theme', 'dark');
             }
         });
     </script>
